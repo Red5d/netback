@@ -1,0 +1,30 @@
+#! /bin/bash
+
+# Netback backup script.
+
+# Author: Red5d - https://github.com/Red5d
+
+
+#config file is netback-config in same dir as script
+
+#only support for 1 (manually configured) backup operation at the moment
+
+#This pulls in the TO, FROM, RSYNC_OPTS, REDIRECT_FILE, MAIL_COMMAND, and MAIL_RECIPIENTS variables.
+source ./netback-config
+
+
+echo "Confirm parameters for backup:"
+echo "From: "$FROM
+echo "To:   "$TO
+if [ '$MAIL_COMMAND' != '' ];then
+  echo "Mailing results to "$MAIL_RECIPIENTS
+fi
+echo
+echo -n "Continue and backup? (y/n): "
+read yesno
+if [ '$yesno' == 'y' ];then
+  rsync $RSYNC_OPTS $FROM $TO
+else
+  echo "Cancelled."
+  exit
+fi

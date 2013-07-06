@@ -1,0 +1,14 @@
+# Config file for Netback
+
+
+FROM=
+
+TO=
+
+RSYNC_OPTS="-ravzi --exclude-from $FROM/.netback/excludes.txt"
+
+REDIRECT_FILE=
+
+MAIL_COMMAND=
+
+MAIL_RECIPIENTS=
