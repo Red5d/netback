@@ -13,9 +13,37 @@
 source ./netback-config
 
 
+case $1 in
+	backup)
+
+		#run a backup manually
+
+
+		;;
+	list)
+		
+		#list all configured backups
+		for loc in $LOCATIONS[@]; do
+			locFROM=$(grep FROM $loc/.netback/config.txt | cut -d'=' -f2)
+			locTO=$(grep TO $loc/.netback/config.txt | cut -d'=' -f2)
+			echo "Configured backups:"
+			echo "From: "$locFROM" -> To: "$locTO
+			echo
+		done
+
+		;;
+	setup)
+
+		#setup a new backup operation
+		echo "Configuring a new backup operation:"
+		echo 
+
+		;;
+esac
+
 echo "Confirm parameters for backup:"
-echo "From: "$FROM
-echo "To:   "$TO
+echo "Backup from: "$FROM
+echo "...to:       "$TO
 if [ '$MAIL_COMMAND' != '' ];then
   echo "Mailing results to "$MAIL_RECIPIENTS
 fi
